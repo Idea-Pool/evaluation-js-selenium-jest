@@ -4,24 +4,23 @@
 > 1. Delete this quotation
 > 1. Delete tasks
 
-# evaluation-template
+# evaluation-selenium-jest
 
-- [ ] Update name to evaluation-(framework name) here and in pacakge.json too
-
-This is a template repository to create test-ware for evaluating certain (JS) test automation tools.
-
-- [ ] Update description to describe purpose of this repository, e.g. This is a test-ware for evaluation FRAMEWORK test automation tool.
+This is a test-ware for evaluation of Selium with Jest test automation tool.
 
 ## Prerequisites
 
 1. Node.js LTS
-1. [ ] Add additional prerequisites if necessary
 
 ## Framework used
 
-- [ ] Add name of the framework
-- [ ] Add URL to the homepage and API docs of the framework
-- [ ] Add brief description of the framework
+Name: Selenium webdriver
+Homepage: https://www.selenium.dev/
+Description: Selenium is a browser automation library. Most often used for testing web-applications, Selenium may be used for any task that requires automating interaction with the browser.
+
+Name: Jest
+Homepage: https://jestjs.io/
+Description: Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
 
 ## Test cases
 
@@ -33,12 +32,8 @@ The implemented test cases can be found in [TESTCASES.md](TESTCASES.md).
 npm install
 ```
 
-- [ ] Add additional setup instructions if necessary
-
 ## Execution
 
 ```bash
 npm test
 ```
-
-- [ ] Add additional instructions to run tests

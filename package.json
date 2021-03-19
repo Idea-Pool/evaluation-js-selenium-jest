@@ -1,7 +1,7 @@
 {
-  "name": "evaluation-template",
-  "version": "0.0.1",
-  "description": "This is a template repository to create test-ware for evaluating certain (JS) test automation tools.",
+  "name": "evaluation-selenium-jest",
+  "version": "1.0.0",
+  "description": "This is a test-ware for evaluation of Selium with Jest test automation tool.",
   "main": "-",
   "scripts": {
     "test": "echo \"No tests defined\" && exit 1",
@@ -9,24 +9,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/szikszail/evaluation-template.git"
+    "url": "git+https://github.com/Idea-Pool/evaluation-js-selenium-jest.git"
   },
   "keywords": [
     "Test",
     "automation",
     "Tool",
     "Evaluation",
-    "JavaScript"
+    "JavaScript",
+    "Selenium",
+    "Jest"
   ],
-  "author": "Laszlo Szikszai <sziklaszlo@gmail.com>",
+  "author": "Kalman Takacs <kalman.takacs.1987@gmail.com>",
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/szikszail/evaluation-template/issues"
+    "url": "https://github.com/Idea-Pool/evaluation-js-selenium-jest/issues"
   },
-  "homepage": "https://github.com/szikszail/evaluation-template#readme",
+  "homepage": "https://github.com/Idea-Pool/evaluation-js-selenium-jest#readme",
   "dependencies": {
     "eslint": "^6.8.0",
-    "husky": "^4.0.10"
+    "husky": "^4.0.10",
+    "jest": "^26.6.3",
+    "selenium-webdriver": "^4.0.0-beta.2"
   },
   "husky": {
     "precommit": "npm run lint"
