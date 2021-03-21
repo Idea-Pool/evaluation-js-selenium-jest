@@ -1,6 +1,6 @@
 const chrome = require("selenium-webdriver/chrome");
 const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
-const { Builder, until } = require("selenium-webdriver");
+const { Builder, until, promise } = require("selenium-webdriver");
 const { Browser, PageLoadStrategy } = require("selenium-webdriver/lib/capabilities");
 const { By } = require("selenium-webdriver");
 const service = new chrome.ServiceBuilder(chromePath).build();
@@ -22,7 +22,10 @@ class Angular {
         this.heroText = driver.findElement(By.css("div.hero-headline"));
         this.getStartedButton = driver.findElement(By.css("a.button"));
         
+        this.searchInput = driver.findElement(By.xpath(".//input"));
         this.sidebar = driver.findElement(By.css("aio-nav-menu.ng-tns-c18-1"));
+
+        this.searchResultlistItem = (text, section) => driver.findElement(By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`));
     }
 
     async load() {
@@ -41,7 +44,9 @@ class Angular {
 
     async clickOn(element, waitCondition){
         await element.click();
-        await driver.wait(until.elementIsVisible(waitCondition));
+        if(waitCondition){
+            await driver.wait(until.elementIsVisible(waitCondition));
+        }
     }
 
     async getCurrentURL(){
@@ -50,6 +55,28 @@ class Angular {
 
     async getTitle(){
         return await driver.getTitle();
+    }
+
+    async getInputText(element){
+        return await element.getAttribute("value");
+    }
+
+    async getAttribute(element, attribute){
+        return await element.getAttribute(attribute);
+    }
+
+    async fieldIsTypedIn(element, text){
+        await element.sendKeys(text);
+    }
+
+    async getSearchResultListItem(text, section){
+        await driver.sleep(3000);
+        const searchResultListItem = this.searchResultlistItem(text, section);
+        return searchResultListItem;
+    }
+
+    async sleep(time){
+        await driver.sleep(time);
     }
 }
 
