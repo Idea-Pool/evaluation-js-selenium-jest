@@ -1,5 +1,3 @@
-const { Driver } = require("selenium-webdriver/edge");
-const { DriverService } = require("selenium-webdriver/remote");
 const Angular = require("../pageObject/angularPage");
 const angularPage = new Angular();
 

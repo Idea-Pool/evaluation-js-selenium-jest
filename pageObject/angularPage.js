@@ -1,6 +1,6 @@
 const chrome = require("selenium-webdriver/chrome");
 const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
-const { Builder, until, promise } = require("selenium-webdriver");
+const { Builder, until } = require("selenium-webdriver");
 const { Browser, PageLoadStrategy } = require("selenium-webdriver/lib/capabilities");
 const { By } = require("selenium-webdriver");
 const service = new chrome.ServiceBuilder(chromePath).build();
