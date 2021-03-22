@@ -1,5 +1,20 @@
 const Angular = require("../pageObject/angularPage");
-const angularPage = new Angular();
+const chrome = require("selenium-webdriver/chrome");
+const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
+const webdriver = require("selenium-webdriver");
+const { Builder } = require("selenium-webdriver");
+const { Browser, PageLoadStrategy } = require("selenium-webdriver/lib/capabilities");
+const service = new chrome.ServiceBuilder(chromePath).build();
+chrome.setDefaultService(service);
+
+const driver = new Builder().forBrowser(Browser.CHROME).setChromeOptions(new chrome.Options()
+    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
+    .addArguments(["--ignore-certificate-errors",
+        "--disable-extensions",
+        "--disable-popup-blocking",
+        "enable-automation"]))
+    .build();
+const angularPage = new Angular(driver, webdriver);
 
 
 describe("TC-1 Checking landing pages elements", () => {
