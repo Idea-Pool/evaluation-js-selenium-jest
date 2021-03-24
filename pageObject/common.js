@@ -28,6 +28,14 @@ class Common {
     async getTitle(){
         return await this.driver.getTitle();
     }
+
+    async sleep(time){
+        await this.driver.sleep(time);
+    }
+    
+    async getAttribute(element, attribute){
+        return await element.getAttribute(attribute);
+    }
 }
 
 module.exports = Common;

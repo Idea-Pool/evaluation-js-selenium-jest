@@ -6,6 +6,8 @@
   "scripts": {
     "pretest": "webdriver-manager update",
     "test": "jest",
+    "test:angular": "jest -i tests/angular.test.js",
+    "test:getBootStrap": "jest -i tests/getBootStrap.test.js",
     "lint": "eslint tests --fix"
   },
   "repository": {

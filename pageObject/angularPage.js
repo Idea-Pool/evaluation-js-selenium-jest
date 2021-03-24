@@ -25,10 +25,6 @@ class Angular extends Common{
         return await element.getAttribute("value");
     }
 
-    async getAttribute(element, attribute){
-        return await element.getAttribute(attribute);
-    }
-
     async fieldIsTypedIn(element, text){
         await element.sendKeys(text);
     }
@@ -37,10 +33,6 @@ class Angular extends Common{
         await this.driver.sleep(3000);
         const searchResultListItem = this.searchResultlistItem(text, section);
         return searchResultListItem;
-    }
-
-    async sleep(time){
-        await this.driver.sleep(time);
     }
 }
 

@@ -3,17 +3,11 @@ const chrome = require("selenium-webdriver/chrome");
 const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
 const webdriver = require("selenium-webdriver");
 const { Builder } = require("selenium-webdriver");
-const { Browser, PageLoadStrategy } = require("selenium-webdriver/lib/capabilities");
+const { Browser } = require("selenium-webdriver/lib/capabilities");
 const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
-const driver = new Builder().forBrowser(Browser.CHROME).setChromeOptions(new chrome.Options()
-    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
-    .addArguments(["--ignore-certificate-errors",
-        "--disable-extensions",
-        "--disable-popup-blocking",
-        "enable-automation"]))
-    .build();
+const driver = new Builder().forBrowser(Browser.CHROME).build();
 const angularPage = new Angular(driver, webdriver);
 
 
