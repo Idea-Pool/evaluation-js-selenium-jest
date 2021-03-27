@@ -6,6 +6,7 @@ class Common {
     }
 
     async isVisible(element){
+        await this.driver.wait(this.webdriver.until.elementIsVisible(element));
         return element.isDisplayed();
     }
 
@@ -35,6 +36,10 @@ class Common {
     
     async getAttribute(element, attribute){
         return await element.getAttribute(attribute);
+    }
+
+    async isEnabled(element){
+        return element.isEnabled();
     }
 }
 

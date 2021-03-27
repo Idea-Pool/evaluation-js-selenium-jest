@@ -3,5 +3,5 @@
 
 module.exports = {
     coverageDirectory: "coverage",
-    testTimeout: 10000,
+    testTimeout: 15000,
 };
