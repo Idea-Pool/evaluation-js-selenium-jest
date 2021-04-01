@@ -1,44 +1,85 @@
-
 class Common {
-    constructor(driver, webdriver){
+    constructor(driver, webdriver) {
         this.driver = driver;
         this.webdriver = webdriver;
     }
 
-    async isVisible(element){
+    /**
+     * Returns if the element is displayed.
+     * 
+     * @param  {ElementFinder} element
+     * @returns {Promise<boolean>}
+     */
+    async isVisible(element) {
         await this.driver.wait(this.webdriver.until.elementIsVisible(element));
         return element.isDisplayed();
     }
 
-    async getText(element){
+    /**
+     * Returns the text of the element.
+     * 
+     * @param  {ElementFinder} element
+     * @returns {Promise<string>}
+     */
+    async getText(element) {
         await this.driver.wait(this.webdriver.until.elementIsVisible(element));
         return element.getText();
     }
 
-    async clickOn(element, waitCondition){
+    /**
+     * Clicks on the element and wait until an element will be displayed.
+     * 
+     * @param  {ElementFinder} element
+     * @param  {ElementFinder} waitCondition
+     */
+    async clickOn(element, waitCondition) {
         await element.click();
-        if(waitCondition){
+        if (waitCondition) {
             await this.driver.wait(this.webdriver.until.elementIsVisible(waitCondition));
         }
     }
 
-    async getCurrentURL(){
+    /**
+     * Gets the current URL.
+     */
+    async getCurrentURL() {
         return this.driver.getCurrentUrl();
     }
 
-    async getTitle(){
+    /**
+     * Gets the title of the page.
+     */
+    async getTitle() {
         return await this.driver.getTitle();
     }
 
-    async sleep(time){
+    /**
+     * Wait until a defined time.
+     * 
+     * @param  {number} time (ms)
+     */
+    async sleep(time) {
         await this.driver.sleep(time);
     }
-    
-    async getAttribute(element, attribute){
+
+    /**
+     * Returns a defined attribute of the element.
+     * 
+     * @param  {ElementFinder} element
+     * @param  {String} attribute
+     * @returns {Promise<(string|null)>}
+     */
+    async getAttribute(element, attribute) {
         return await element.getAttribute(attribute);
     }
 
-    async isEnabled(element){
+    /**
+     * Returns if an element is enabled.
+     * 
+     * @param  {ElementFinder} element
+     * @returns {Promise<boolean>}
+     */
+    async isEnabled(element) {
         return element.isEnabled();
     }
 }

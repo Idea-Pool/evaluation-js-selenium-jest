@@ -1,7 +1,7 @@
 const { until } = require("selenium-webdriver");
 const Common = require("./common");
 
-class Angular extends Common{
+class Angular extends Common {
     constructor(driver, webdriver) {
         super(driver, webdriver);
         this.url = "https://angular.io";
@@ -9,7 +9,7 @@ class Angular extends Common{
         this.angularLogoInHero = this.driver.findElement(this.webdriver.By.css(".hero-logo > img"));
         this.heroText = this.driver.findElement(this.webdriver.By.css("div.hero-headline"));
         this.getStartedButton = this.driver.findElement(this.webdriver.By.css("a.button"));
-        
+
         this.searchInput = this.driver.findElement(this.webdriver.By.xpath(".//input"));
         this.sidebar = this.driver.findElement(this.webdriver.By.css("aio-nav-menu.ng-tns-c18-1"));
 
@@ -21,15 +21,15 @@ class Angular extends Common{
         await this.driver.wait(until.elementIsVisible(this.getStartedButton));
     }
 
-    async getInputText(element){
+    async getInputText(element) {
         return await element.getAttribute("value");
     }
 
-    async fieldIsTypedIn(element, text){
+    async fieldIsTypedIn(element, text) {
         await element.sendKeys(text);
     }
 
-    async getSearchResultListItem(text, section){
+    async getSearchResultListItem(text, section) {
         await this.driver.sleep(3000);
         const searchResultListItem = this.searchResultlistItem(text, section);
         return searchResultListItem;

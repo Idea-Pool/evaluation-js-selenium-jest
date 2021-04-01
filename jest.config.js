@@ -2,6 +2,11 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
-    coverageDirectory: "coverage",
     testTimeout: 15000,
+    reporters: [
+        "default",
+        ["./node_modules/jest-html-reporter", {
+            "pageTitle": "Test Report"
+        }]
+    ]
 };

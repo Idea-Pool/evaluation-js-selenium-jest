@@ -21,31 +21,62 @@ class GetBootStrap extends Common {
         this.options = this.exampleSelect.findElements(this.webdriver.By.css("option"));
     }
 
+    /**
+     * Loads a page and wait until an element will be displayed.
+     * 
+     * @param  {String} url
+     * @param  {ElementFinder} element
+     */
     async load(url, element) {
         await await this.driver.get(this.url + url);
         await this.driver.wait(this.webdriver.until.elementIsVisible(element));
     }
 
+    /**
+     * Scrolls to an element.
+     * 
+     * @param  {ElementFinder} element
+     * @returns {Promise<undefined>}
+     */
     async scrollToElement(element) {
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
         return this.driver.sleep(300);
     }
 
+    /**
+     * Returns if an element is selected.
+     * 
+     * @param  {ElementFinder} element
+     * @returns {Promise<boolean>}
+     */
     async isSelected(element) {
         return element.isSelected();
     }
 
-    async getTexts(elements){
-        const texts= [];
-        for(const element of elements){
+    /**
+     * Returns if an element is selected.
+     * 
+     * @param  {ElementArrayFinder} elements
+     * @returns {Array}
+     */
+    async getTexts(elements) {
+        const texts = [];
+        for (const element of elements) {
             texts.push(await element.getText());
         }
         return texts;
     }
 
-    async selectMultiSelect(element, options, number){
+    /**
+     * Selects an option in the multiselect.
+     * 
+     * @param  {ElementFinder} element
+     * @param  {ElementFinder} option
+     * @param  {number} number
+     */
+    async selectMultiSelect(element, option, number) {
         await element.click();
-        await options[number].click();
+        await option[number].click();
     }
 }
 

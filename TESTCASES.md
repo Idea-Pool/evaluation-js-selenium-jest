@@ -21,7 +21,7 @@
 > - [x] Checking attribute of element
 > - [x] Checking number of elements
 > - [x] Selecting element by its text
-> - [x] Checking whether element is in the viewport
+> - [-] Checking whether element is in the viewport
 > - [x] Scrolling page
 > - [ ] Any more action/check necessary...
 
