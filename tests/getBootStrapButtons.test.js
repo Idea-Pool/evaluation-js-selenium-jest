@@ -13,7 +13,6 @@ this.getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
 describe("TC-6 Checking button form elements", () => {
     beforeAll(async () => {
         await this.getBootStrapButtons.load("buttons/#disabled-state", this.getBootStrapButtons.downloadButton);
-        await this.getBootStrapButtons.sleep(1500);
     });
 
     test("there should be a button with text Primary button", async () => {

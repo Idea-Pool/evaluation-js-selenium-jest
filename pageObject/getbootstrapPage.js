@@ -17,6 +17,7 @@ class GetBootStrap extends Common {
 
         this.emailField = this.driver.findElement(this.webdriver.By.id("exampleFormControlInput1"));
         this.exampleSelect = this.driver.findElement(this.webdriver.By.id("exampleFormControlSelect1"));
+        
         this.exampleMultiSelect = this.driver.findElement(this.webdriver.By.id("exampleFormControlSelect2"));
         this.options = this.exampleSelect.findElements(this.webdriver.By.css("option"));
     }
@@ -54,7 +55,7 @@ class GetBootStrap extends Common {
     }
 
     /**
-     * Returns if an element is selected.
+     * Returns texts of the elements.
      * 
      * @param  {ElementArrayFinder} elements
      * @returns {Array}
@@ -77,6 +78,7 @@ class GetBootStrap extends Common {
     async selectMultiSelect(element, option, number) {
         await element.click();
         await option[number].click();
+        return this.sleep(10);
     }
 }
 

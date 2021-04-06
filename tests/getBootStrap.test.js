@@ -28,7 +28,6 @@ describe("TC-3 Checking form elements", () => {
     });
 
     describe("The readonly input is scrolled into the viewport", () => {
-
         beforeAll(async () => {
             await this.getBootStrap.scrollToElement(this.getBootStrap.readOnlyInputField);
         });
@@ -106,7 +105,6 @@ describe("TC-5 Interaction with radio form elements", () => {
 describe("TC-7 Checking select form elements", () => {
     beforeAll(async () => {
         await this.getBootStrap.scrollToElement(this.getBootStrap.emailField);
-        await this.getBootStrap.sleep(300);
     });
 
     test("the example select should be visible", async () => {
@@ -134,7 +132,6 @@ describe("TC-7 Checking select form elements", () => {
     describe("The option 2 is selected in example select", () => {
         beforeAll(async () => {
             await this.getBootStrap.selectMultiSelect(this.getBootStrap.exampleSelect, await this.getBootStrap.options, 1);
-            await this.getBootStrap.sleep(200);
         });
         
         test("the selected option in example select should be 2", async () => {
