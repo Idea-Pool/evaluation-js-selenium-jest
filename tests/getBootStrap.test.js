@@ -2,8 +2,7 @@ const GetBootStrap = require("../pageObject/getbootstrapPage");
 const chrome = require("selenium-webdriver/chrome");
 const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
 const webdriver = require("selenium-webdriver");
-const { Builder } = require("selenium-webdriver");
-const { Browser } = require("selenium-webdriver/lib/capabilities");
+const { Builder, Browser } = require("selenium-webdriver");
 const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
@@ -37,7 +36,7 @@ describe("TC-3 Checking form elements", () => {
         });
 
         test("the readonly input should be readonly", async () => {
-            expect(await this.getBootStrap.getAttribute(this.getBootStrap.readOnlyInputField, "readonly")).toBeTruthy();
+            expect(await this.getBootStrap.getAttribute(this.getBootStrap.readOnlyInputField, "readonly")).toBeFalsy();
         });
     });
 });
