@@ -1,4 +1,3 @@
-const { Key } = require("selenium-webdriver");
 const Common = require("./common");
 
 class GetBootsrapPageButtons extends Common {
@@ -30,7 +29,7 @@ class GetBootsrapPageButtons extends Common {
      * @param  {ElementFinder} element
      */
     async scrollDownOnePage(element) {
-        await element.sendKeys(Key.PAGE_UP);
+        await element.sendKeys(this.webdriver.Key.PAGE_UP);
     }
 }
 

@@ -1,4 +1,3 @@
-const { until } = require("selenium-webdriver");
 const Common = require("./common");
 
 class Angular extends Common {
@@ -22,7 +21,7 @@ class Angular extends Common {
      */
     async load() {
         await this.driver.get(this.url);
-        await this.driver.wait(until.elementIsVisible(this.getStartedButton));
+        await this.driver.wait(this.webdriver.until.elementIsVisible(this.getStartedButton));
     }
 
     /**
@@ -66,7 +65,7 @@ class Angular extends Common {
      * @returns {IThenable<T>|WebElementPromise}
      */
     async waitForElementInvisible(element){
-        return this.driver.wait(until.stalenessOf(element));
+        return this.driver.wait(this.webdriver.until.stalenessOf(element));
     }
 
     /**
@@ -76,7 +75,7 @@ class Angular extends Common {
      * @returns {IThenable<T>|WebElementPromise}
      */
     async isTitleOk(title){
-        return this.driver.wait(until.titleIs(title));
+        return this.driver.wait(this.webdriver.until.titleIs(title));
     }
 
 }

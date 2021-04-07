@@ -5,6 +5,9 @@ module.exports = {
     testTimeout: 20000,
     reporters: [
         "default",
-        "jest-html-reporters"
+        ["jest-html-reporters", {
+            "publicPath": "./html-report",
+            "filename": "report.html",
+        }]
     ]
 };

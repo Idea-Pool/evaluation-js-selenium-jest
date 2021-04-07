@@ -1,12 +1,11 @@
 const GetBootStrap = require("../pageObject/getbootstrapPage");
 const chrome = require("selenium-webdriver/chrome");
-const chromePath = "./node_modules/webdriver-manager/selenium/chromedriver_89.0.4389.23.exe";
+const chromePath = require("chromedriver").path;
 const webdriver = require("selenium-webdriver");
-const { Builder, Browser } = require("selenium-webdriver");
 const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
-const driver = new Builder().forBrowser(Browser.CHROME).build();
+const driver = new webdriver.Builder().forBrowser(webdriver.Browser.CHROME).build();
 driver.manage().window().maximize();
 this.getBootStrap = new GetBootStrap(driver, webdriver);
 
