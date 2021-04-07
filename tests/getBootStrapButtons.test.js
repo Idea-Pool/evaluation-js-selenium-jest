@@ -7,6 +7,7 @@ const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
 const driver = new Builder().forBrowser(Browser.CHROME).build();
+driver.manage().window().maximize();
 this.getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
 
 describe("TC-6 Checking button form elements", () => {

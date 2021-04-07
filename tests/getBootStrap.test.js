@@ -7,6 +7,7 @@ const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
 const driver = new Builder().forBrowser(Browser.CHROME).build();
+driver.manage().window().maximize();
 this.getBootStrap = new GetBootStrap(driver, webdriver);
 
 describe("TC-3 Checking form elements", () => {
@@ -36,7 +37,7 @@ describe("TC-3 Checking form elements", () => {
         });
 
         test("the readonly input should be readonly", async () => {
-            expect(await this.getBootStrap.getAttribute(this.getBootStrap.readOnlyInputField, "readonly")).toBeFalsy();
+            expect(await this.getBootStrap.getAttribute(this.getBootStrap.readOnlyInputField, "readonly")).toBeTruthy();
         });
     });
 });

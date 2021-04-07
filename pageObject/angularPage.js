@@ -38,6 +38,9 @@ class Angular extends Common {
     /**
      * The field is typed in.
      * 
+     * @params {ElementFinder} element
+     * @params {String} text
+     * 
      */
     async fieldIsTypedIn(element, text) {
         await element.sendKeys(text);

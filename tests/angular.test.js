@@ -7,8 +7,8 @@ const service = new chrome.ServiceBuilder(chromePath).build();
 chrome.setDefaultService(service);
 
 const driver = new Builder().forBrowser(Browser.CHROME).build();
+driver.manage().window().maximize();
 const angularPage = new Angular(driver, webdriver);
-
 
 describe("TC-1 Checking landing pages elements", () => {
     beforeAll(async () => {
@@ -60,7 +60,7 @@ describe("TC-2 Checking search field on landing page", () => {
         expect(await angularPage.getAttribute(angularPage.searchInput, "placeholder")).toBe("Search");
     });
 
-    describe("it is clicked in", () => {
+    describe("it is clicked in and typed in", () => {
         beforeAll(async () => {
             await angularPage.clickOn(angularPage.searchInput, angularPage.searchInput);
             await angularPage.fieldIsTypedIn(angularPage.searchInput, "directive");
