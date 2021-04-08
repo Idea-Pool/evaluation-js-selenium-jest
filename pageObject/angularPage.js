@@ -53,7 +53,7 @@ class Angular extends Common {
      * @returns {ElementFinder}
      */
     async getSearchResultListItem(text, section) {
-        await this.driver.sleep(1000);
+        await this.driver.sleep(1200);
         const searchResultListItem = this.searchResultlistItem(text, section);
         return searchResultListItem;
     }
