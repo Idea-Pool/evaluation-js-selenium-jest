@@ -2,34 +2,43 @@ const GetBootStrapButtons = require("../pageObject/getbootstrapPageButtons");
 const chrome = require("selenium-webdriver/chrome");
 const chromePath = require("chromedriver").path;
 const webdriver = require("selenium-webdriver");
-const service = new chrome.ServiceBuilder(chromePath).build();
-chrome.setDefaultService(service);
 
-const driver = new webdriver.Builder().forBrowser(webdriver.Browser.CHROME).build();
-driver.manage().window().maximize();
-this.getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
+describe("Tests for getBootStrapButton page", () => {
+    let driver;
+    let getBootStrapButtons;
 
-describe("TC-6 Checking button form elements", () => {
     beforeAll(async () => {
-        await this.getBootStrapButtons.load("buttons/#disabled-state", this.getBootStrapButtons.downloadButton);
+        const service = new chrome.ServiceBuilder(chromePath).build();
+        chrome.setDefaultService(service);
+
+        driver = new webdriver.Builder().forBrowser(webdriver.Browser.CHROME).build();
+        driver.manage().window().maximize();
+
+        getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
+        await getBootStrapButtons.load("buttons/#disabled-state", getBootStrapButtons.downloadButton);
     });
 
-    test("there should be a button with text Primary button", async () => {
-        expect(await this.getBootStrapButtons.isVisible(this.getBootStrapButtons.primaryButton)).toBeTruthy();
+    afterAll(async () => {
+        driver.quit();
     });
 
-    test("the primary button should be disabled", async () => {
-        expect(await this.getBootStrapButtons.isEnabled(this.getBootStrapButtons.primaryButton)).toBeFalsy();
-    });
-
-    describe("the page is scrolled down 1 page", () => {
-        beforeAll(async () => {
-            await this.getBootStrapButtons.scrollDownOnePage(this.getBootStrapButtons.primaryLink);
+    describe("TC-6 Checking button form elements", () => {
+        test("there should be a button with text Primary button", async () => {
+            expect(await getBootStrapButtons.isVisible(getBootStrapButtons.primaryButton)).toBeTruthy();
         });
 
-        test("the active primary link button should not be disabled", async () => {
-            expect(await this.getBootStrapButtons.isEnabled(this.getBootStrapButtons.primaryLink)).toBeTruthy();
+        test("the primary button should be disabled", async () => {
+            expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.primaryButton)).toBeFalsy();
+        });
+
+        describe("the page is scrolled down 1 page", () => {
+            beforeAll(async () => {
+                await getBootStrapButtons.scrollDownOnePage(getBootStrapButtons.primaryLink);
+            });
+
+            test("the active primary link button should not be disabled", async () => {
+                expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.primaryLink)).toBeTruthy();
+            });
         });
     });
-
 });
