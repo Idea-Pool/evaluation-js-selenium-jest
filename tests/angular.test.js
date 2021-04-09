@@ -1,24 +1,17 @@
 const Angular = require("../pageObject/angularPage");
-const chrome = require("selenium-webdriver/chrome");
-const chromePath = require("chromedriver").path;
+const browserDriver = require("../helper/browser");
 const webdriver = require("selenium-webdriver");
-
 
 describe("Tests for angular page", () => {
     let driver;
     let angularPage;
 
     beforeAll(async () => {
-        const service = new chrome.ServiceBuilder(chromePath).build();
-        chrome.setDefaultService(service);
-
-        driver = new webdriver.Builder().forBrowser(webdriver.Browser.CHROME).build();
-        driver.manage().window().maximize();
-
+        driver = browserDriver();
         angularPage = new Angular(driver, webdriver);
         await angularPage.load();
     });
-    
+
     afterAll(async () => {
         driver.quit();
     });

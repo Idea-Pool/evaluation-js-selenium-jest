@@ -4,7 +4,8 @@ class Angular extends Common {
     constructor(driver, webdriver) {
         super(driver, webdriver);
         this.url = "https://angular.io";
-        this.angularLogoInNavbar = this.driver.findElement(this.webdriver.By.css(".mat-toolbar-row a.nav-link > img"));
+
+        this.angularLogoInNavbar = this.driver.findElement(this.webdriver.By.css(".mat-toolbar-row a.nav-link > img"));       
         this.angularLogoInHero = this.driver.findElement(this.webdriver.By.css(".hero-logo > img"));
         this.heroText = this.driver.findElement(this.webdriver.By.css("div.hero-headline"));
         this.getStartedButton = this.driver.findElement(this.webdriver.By.css("a.button"));

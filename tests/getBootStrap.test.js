@@ -1,6 +1,5 @@
 const GetBootStrap = require("../pageObject/getbootstrapPage");
-const chrome = require("selenium-webdriver/chrome");
-const chromePath = require("chromedriver").path;
+const browserDriver = require("../helper/browser");
 const webdriver = require("selenium-webdriver");
 
 describe("Tests for getBootStrap page", () => {
@@ -8,12 +7,7 @@ describe("Tests for getBootStrap page", () => {
     let getBootStrap;
 
     beforeAll(async () => {
-        const service = new chrome.ServiceBuilder(chromePath).build();
-        chrome.setDefaultService(service);
-
-        driver = new webdriver.Builder().forBrowser(webdriver.Browser.CHROME).build();
-        driver.manage().window().maximize();
-
+        driver = browserDriver();
         getBootStrap = new GetBootStrap(driver, webdriver);
         await getBootStrap.load("forms/", getBootStrap.downloadButton);
     });
