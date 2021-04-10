@@ -5,6 +5,10 @@ class Angular extends Common {
         super(driver, webdriver);
         this.url = "https://angular.io";
 
+        this.locator = {
+            searchResultlistItems : this.webdriver.By.css("a.search-result-item"),
+        };
+
         this.angularLogoInNavbar = this.driver.findElement(this.webdriver.By.css(".mat-toolbar-row a.nav-link > img"));       
         this.angularLogoInHero = this.driver.findElement(this.webdriver.By.css(".hero-logo > img"));
         this.heroText = this.driver.findElement(this.webdriver.By.css("div.hero-headline"));
@@ -13,7 +17,6 @@ class Angular extends Common {
         this.searchInput = this.driver.findElement(this.webdriver.By.xpath(".//input"));
         this.sidebar = this.driver.findElement(this.webdriver.By.css("aio-nav-menu.ng-tns-c18-1"));
 
-        this.searchResultlistItems = this.webdriver.By.css("a.search-result-item");
         this.searchResultlistItem = (text, section) => this.driver.findElement(this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`));
     }
 

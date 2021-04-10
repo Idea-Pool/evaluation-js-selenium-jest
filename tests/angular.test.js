@@ -85,7 +85,7 @@ describe("Tests for angular page", () => {
             });
 
             test("Directive should be listed in the API section", async () => {
-                await angularPage.waitForElementLocated(angularPage.searchResultlistItems);
+                await angularPage.waitForElementLocated(angularPage.locator.searchResultlistItems);
                 const searchResultListItem = await angularPage.getSearchResultListItem("Directive", "api");
                 expect(await angularPage.isVisible(searchResultListItem)).toBeTruthy();
             });
