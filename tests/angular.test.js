@@ -1,13 +1,25 @@
 const Angular = require("../pageObject/angularPage");
-const browserDriver = require("../helper/browser");
+const DriverHelper = require("../helpers/driverHelper");
 const webdriver = require("selenium-webdriver");
+let driverHelper = new DriverHelper();
+let driver;
+
+const reporter = {
+    specDone: async (result) => {
+        if (result.status === "failed") {
+            const screenshot = await driver.takeScreenshot();
+            driverHelper.writeScreenShot(screenshot);
+        }
+    },
+};
+// eslint-disable-next-line no-undef
+jasmine.getEnv().addReporter(reporter);
 
 describe("Tests for angular page", () => {
-    let driver;
     let angularPage;
-
+    
     beforeAll(async () => {
-        driver = browserDriver();
+        driver = driverHelper.driver();
         angularPage = new Angular(driver, webdriver);
         await angularPage.load();
     });
@@ -73,6 +85,7 @@ describe("Tests for angular page", () => {
             });
 
             test("Directive should be listed in the API section", async () => {
+                await angularPage.waitForElementLocated(angularPage.searchResultlistItems);
                 const searchResultListItem = await angularPage.getSearchResultListItem("Directive", "api");
                 expect(await angularPage.isVisible(searchResultListItem)).toBeTruthy();
             });

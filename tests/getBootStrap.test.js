@@ -1,13 +1,25 @@
 const GetBootStrap = require("../pageObject/getbootstrapPage");
-const browserDriver = require("../helper/browser");
+const DriverHelper = require("../helpers/driverHelper");
 const webdriver = require("selenium-webdriver");
+let driverHelper = new DriverHelper();
+let driver;
+
+const reporter = {
+    specDone: async (result) => {
+        if (result.status === "failed") {
+            const screenshot = await driver.takeScreenshot();
+            driverHelper.writeScreenShot(screenshot);
+        }
+    },
+};
+// eslint-disable-next-line no-undef
+jasmine.getEnv().addReporter(reporter);
 
 describe("Tests for getBootStrap page", () => {
-    let driver;
     let getBootStrap;
 
     beforeAll(async () => {
-        driver = browserDriver();
+        driver = driverHelper.driver();
         getBootStrap = new GetBootStrap(driver, webdriver);
         await getBootStrap.load("forms/", getBootStrap.downloadButton);
     });

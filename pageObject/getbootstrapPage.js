@@ -77,9 +77,7 @@ class GetBootStrap extends Common {
      */
     async selectMultiSelect(element, option, number) {
         await element.click();
-        await this.sleep(10);
         await option[number].click();
-        return this.sleep(10);
     }
 }
 

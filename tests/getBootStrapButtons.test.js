@@ -1,13 +1,26 @@
 const GetBootStrapButtons = require("../pageObject/getbootstrapPageButtons");
-const browserDriver = require("../helper/browser");
+const DriverHelper = require("../helpers/driverHelper");
 const webdriver = require("selenium-webdriver");
+let driverHelper = new DriverHelper();
+let driver;
+
+const reporter = {
+    specDone: async (result) => {
+        if (result.status === "failed") {
+            const screenshot = await driver.takeScreenshot();
+            driverHelper.writeScreenShot(screenshot);
+        }
+    },
+};
+// eslint-disable-next-line no-undef
+jasmine.getEnv().addReporter(reporter);
+
 
 describe("Tests for getBootStrapButton page", () => {
-    let driver;
     let getBootStrapButtons;
 
     beforeAll(async () => {
-        driver = browserDriver();
+        driver = driverHelper.driver();
         getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
         await getBootStrapButtons.load("buttons/#disabled-state", getBootStrapButtons.downloadButton);
     });

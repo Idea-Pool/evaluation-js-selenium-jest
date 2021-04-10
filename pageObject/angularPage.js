@@ -13,6 +13,7 @@ class Angular extends Common {
         this.searchInput = this.driver.findElement(this.webdriver.By.xpath(".//input"));
         this.sidebar = this.driver.findElement(this.webdriver.By.css("aio-nav-menu.ng-tns-c18-1"));
 
+        this.searchResultlistItems = this.webdriver.By.css("a.search-result-item");
         this.searchResultlistItem = (text, section) => this.driver.findElement(this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`));
     }
 
@@ -54,7 +55,6 @@ class Angular extends Common {
      * @returns {ElementFinder}
      */
     async getSearchResultListItem(text, section) {
-        await this.driver.sleep(1200);
         const searchResultListItem = this.searchResultlistItem(text, section);
         return searchResultListItem;
     }
@@ -79,6 +79,15 @@ class Angular extends Common {
         return this.driver.wait(this.webdriver.until.titleIs(title));
     }
 
+    /**
+     * Waits until elements are presented in the DOM.
+     * 
+     * @param  {Locator} locator
+     * @returns {IThenable<T>|WebElementPromise}
+     */
+    async waitForElementLocated(locator){
+        return this.driver.wait(this.webdriver.until.elementsLocated(locator));
+    }
 }
 
 module.exports = Angular;

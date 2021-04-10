@@ -105,3 +105,6 @@ dist
 
 # Html reports
 html-report/
+
+# Images
+*.png

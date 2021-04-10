@@ -54,15 +54,6 @@ class Common {
     }
 
     /**
-     * Wait until a defined time.
-     * 
-     * @param  {number} time (ms)
-     */
-    async sleep(time) {
-        await this.driver.sleep(time);
-    }
-
-    /**
      * Returns a defined attribute of the element.
      * 
      * @param  {ElementFinder} element
