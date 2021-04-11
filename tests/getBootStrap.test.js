@@ -1,14 +1,13 @@
 const GetBootStrap = require("../pageObject/getbootstrapPage");
-const DriverHelper = require("../helpers/driverHelper");
+const helpers = require("../helpers/functions");
 const webdriver = require("selenium-webdriver");
-let driverHelper = new DriverHelper();
 let driver;
 
 const reporter = {
     specDone: async (result) => {
         if (result.status === "failed") {
             const screenshot = await driver.takeScreenshot();
-            driverHelper.writeScreenShot(screenshot);
+            helpers.writeScreenShot(screenshot);
         }
     },
 };
@@ -19,7 +18,7 @@ describe("Tests for getBootStrap page", () => {
     let getBootStrap;
 
     beforeAll(async () => {
-        driver = driverHelper.driver();
+        driver = helpers.driver();
         getBootStrap = new GetBootStrap(driver, webdriver);
         await getBootStrap.load("forms/", getBootStrap.downloadButton);
     });
