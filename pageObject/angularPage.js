@@ -1,4 +1,5 @@
 const Common = require("./common");
+const timeout = require("../data/timeouts.json");
 
 class Angular extends Common {
     constructor(driver, webdriver) {
@@ -7,17 +8,14 @@ class Angular extends Common {
 
         this.locator = {
             searchResultlistItems : this.webdriver.By.css("a.search-result-item"),
+            angularLogoInNavbar : this.webdriver.By.css(".mat-toolbar-row a.nav-link > img"),
+            angularLogoInHero : this.webdriver.By.css(".hero-logo > img"),
+            heroText : this.webdriver.By.css("div.hero-headline"),
+            getStartedButton: this.webdriver.By.css("a.button"),
+            searchInput: this.webdriver.By.xpath(".//input"),
+            headerText : this.webdriver.By.css("h1#introduction-to-the-angular-docs"),
+            searchResultlistItem : (text, section) =>this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`)
         };
-
-        this.angularLogoInNavbar = this.driver.findElement(this.webdriver.By.css(".mat-toolbar-row a.nav-link > img"));       
-        this.angularLogoInHero = this.driver.findElement(this.webdriver.By.css(".hero-logo > img"));
-        this.heroText = this.driver.findElement(this.webdriver.By.css("div.hero-headline"));
-        this.getStartedButton = this.driver.findElement(this.webdriver.By.css("a.button"));
-
-        this.searchInput = this.driver.findElement(this.webdriver.By.xpath(".//input"));
-        this.sidebar = this.driver.findElement(this.webdriver.By.css("aio-nav-menu.ng-tns-c18-1"));
-
-        this.searchResultlistItem = (text, section) => this.driver.findElement(this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`));
     }
 
     /**
@@ -26,27 +24,29 @@ class Angular extends Common {
      */
     async load() {
         await this.driver.get(this.url);
-        await this.driver.wait(this.webdriver.until.elementIsVisible(this.getStartedButton));
+        await this.driver.wait(this.webdriver.until.elementLocated(this.locator.getStartedButton));
     }
 
     /**
      * Returns the text of the input field.
      * 
-     * @param  {ElementArrayFinder} elements
+     * @param  {Locator} locator
      * @returns {Array}
      */
-    async getInputText(element) {
+    async getInputText(locator) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         return await element.getAttribute("value");
     }
 
     /**
      * The field is typed in.
      * 
-     * @params {ElementFinder} element
+     * @params {Locator} locator
      * @params {String} text
      * 
      */
-    async fieldIsTypedIn(element, text) {
+    async fieldIsTypedIn(locator, text) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         await element.sendKeys(text);
     }
 
@@ -55,21 +55,11 @@ class Angular extends Common {
      * 
      * @param  {String} text
      * @param  {String} section
-     * @returns {ElementFinder}
+     * @returns {Locator}
      */
     async getSearchResultListItem(text, section) {
-        const searchResultListItem = this.searchResultlistItem(text, section);
+        const searchResultListItem = this.locator.searchResultlistItem(text, section);
         return searchResultListItem;
-    }
-
-    /**
-     * Waits until an element will be invisible.
-     * 
-     * @param  {String} text
-     * @returns {IThenable<T>|WebElementPromise}
-     */
-    async waitForElementInvisible(element){
-        return this.driver.wait(this.webdriver.until.stalenessOf(element));
     }
 
     /**

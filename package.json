@@ -4,7 +4,7 @@
   "description": "This is a test-ware for evaluation of Selium with Jest test automation tool.",
   "main": "-",
   "scripts": {
-    "clean": "rimraf *.png temp/html-report/",
+    "clean": "rimraf temp/screenshots/*.png temp/html-report/",
     "test": "npm run clean && jest",
     "test:angular": "jest -i tests/angular.test.js",
     "test:getBootStrap": "jest -i tests/getBootStrap.test.js",

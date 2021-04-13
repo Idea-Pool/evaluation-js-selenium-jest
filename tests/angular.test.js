@@ -29,24 +29,24 @@ describe("Tests for angular page", () => {
 
     describe("TC-1 Checking landing pages elements", () => {
         test("Angular logo in the top navbar should be visible", async () => {
-            expect(await angularPage.isVisible(angularPage.angularLogoInNavbar)).toBeTruthy();
+            expect(await angularPage.isVisible(angularPage.locator.angularLogoInNavbar)).toBeTruthy();
         });
 
         test("Angular logo in the hero section should be visible", async () => {
-            expect(await angularPage.isVisible(angularPage.angularLogoInHero)).toBeTruthy();
+            expect(await angularPage.isVisible(angularPage.locator.angularLogoInHero)).toBeTruthy();
         });
 
         test("text in hero section should be OK", async () => {
-            expect(await angularPage.getText(angularPage.heroText)).toBe("The modern web\ndeveloper's platform");
+            expect(await angularPage.getText(angularPage.locator.heroText)).toBe("The modern web\ndeveloper's platform");
         });
 
         test("Get started button should be visible in the hero section", async () => {
-            expect(await angularPage.isVisible(angularPage.getStartedButton)).toBeTruthy();
+            expect(await angularPage.isVisible(angularPage.locator.getStartedButton)).toBeTruthy();
         });
 
         describe("Get started button is clicked in the hero section", () => {
             beforeAll(async () => {
-                await angularPage.clickOn(angularPage.getStartedButton, angularPage.sidebar);
+                await angularPage.clickOn(angularPage.locator.getStartedButton, angularPage.locator.headerText);
             });
 
             test("the URL should be OK", async () => {
@@ -62,29 +62,28 @@ describe("Tests for angular page", () => {
 
     describe("TC-2 Checking search field on landing page", () => {
         test("Search input in the top navbar should be visible", async () => {
-            expect(await angularPage.isVisible(angularPage.searchInput)).toBeTruthy();
+            expect(await angularPage.isVisible(angularPage.locator.searchInput)).toBeTruthy();
         });
 
         test("it should be empty", async () => {
-            expect(await angularPage.getInputText(angularPage.searchInput)).toBe("");
+            expect(await angularPage.getInputText(angularPage.locator.searchInput)).toBe("");
         });
 
         test("it should be Search as placeholder", async () => {
-            expect(await angularPage.getAttribute(angularPage.searchInput, "placeholder")).toBe("Search");
+            expect(await angularPage.getAttribute(angularPage.locator.searchInput, "placeholder")).toBe("Search");
         });
 
         describe("it is clicked in and typed in", () => {
             beforeAll(async () => {
-                await angularPage.clickOn(angularPage.searchInput, angularPage.searchInput);
-                await angularPage.fieldIsTypedIn(angularPage.searchInput, "directive");
+                await angularPage.clickOn(angularPage.locator.searchInput, angularPage.locator.searchInput);
+                await angularPage.fieldIsTypedIn(angularPage.locator.searchInput, "directive");
             });
 
             test("Directive word should be in the searchfield", async () => {
-                expect(await angularPage.getInputText(angularPage.searchInput)).toBe("directive");
+                expect(await angularPage.getInputText(angularPage.locator.searchInput)).toBe("directive");
             });
 
             test("Directive should be listed in the API section", async () => {
-                await angularPage.waitForElementLocated(angularPage.locator.searchResultlistItems);
                 const searchResultListItem = await angularPage.getSearchResultListItem("Directive", "api");
                 expect(await angularPage.isVisible(searchResultListItem)).toBeTruthy();
             });
@@ -93,7 +92,6 @@ describe("Tests for angular page", () => {
                 beforeAll(async () => {
                     const searchResultListItem = await angularPage.getSearchResultListItem("Directive", "api");
                     await angularPage.clickOn(searchResultListItem);
-                    await angularPage.waitForElementInvisible(searchResultListItem);
                 });
 
                 test("the URL should be OK", async () => {

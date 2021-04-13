@@ -1,3 +1,5 @@
+const timeout = require("../data/timeouts.json");
+
 class Common {
     constructor(driver, webdriver) {
         this.driver = driver;
@@ -7,35 +9,36 @@ class Common {
     /**
      * Returns if the element is displayed.
      * 
-     * @param  {ElementFinder} element
+     * @param  {Locator} locator
      * @returns {Promise<boolean>}
      */
-    async isVisible(element) {
-        await this.driver.wait(this.webdriver.until.elementIsVisible(element));
+    async isVisible(locator) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         return element.isDisplayed();
     }
 
     /**
      * Returns the text of the element.
      * 
-     * @param  {ElementFinder} element
+     * @param  {Locator} locator
      * @returns {Promise<string>}
      */
-    async getText(element) {
-        await this.driver.wait(this.webdriver.until.elementIsVisible(element));
+    async getText(locator) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         return element.getText();
     }
 
     /**
      * Clicks on the element and wait until an element will be displayed.
      * 
-     * @param  {ElementFinder} element
+     * @param  {Locator} locator
      * @param  {ElementFinder} waitCondition
      */
-    async clickOn(element, waitCondition) {
+    async clickOn(locator, waitCondition) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         await element.click();
         if (waitCondition) {
-            await this.driver.wait(this.webdriver.until.elementIsVisible(waitCondition));
+            await this.driver.wait(this.webdriver.until.elementLocated(waitCondition),timeout.default, `The ${waitCondition} locator is not became visible in the DOM.`);
         }
     }
 
@@ -56,21 +59,23 @@ class Common {
     /**
      * Returns a defined attribute of the element.
      * 
-     * @param  {ElementFinder} element
+     * @param  {Locator} locator
      * @param  {String} attribute
      * @returns {Promise<(string|null)>}
      */
-    async getAttribute(element, attribute) {
+    async getAttribute(locator, attribute) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         return await element.getAttribute(attribute);
     }
 
     /**
      * Returns if an element is enabled.
      * 
-     * @param  {ElementFinder} element
+     * @param  {Locator} locator
      * @returns {Promise<boolean>}
      */
-    async isEnabled(element) {
+    async isEnabled(locator) {
+        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
         return element.isEnabled();
     }
 }
