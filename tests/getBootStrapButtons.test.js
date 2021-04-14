@@ -21,7 +21,7 @@ describe("Tests for getBootStrapButton page", () => {
     beforeAll(async () => {
         driver = helpers.driver();
         getBootStrapButtons = new GetBootStrapButtons(driver, webdriver);
-        await getBootStrapButtons.load("buttons/#disabled-state", getBootStrapButtons.downloadButton);
+        await getBootStrapButtons.load("buttons/#disabled-state", getBootStrapButtons.locator.downloadButton);
     });
 
     afterAll(async () => {
@@ -30,20 +30,20 @@ describe("Tests for getBootStrapButton page", () => {
 
     describe("TC-6 Checking button form elements", () => {
         test("there should be a button with text Primary button", async () => {
-            expect(await getBootStrapButtons.isVisible(getBootStrapButtons.primaryButton)).toBeTruthy();
+            expect(await getBootStrapButtons.isVisible(getBootStrapButtons.locator.primaryButton)).toBeTruthy();
         });
 
         test("the primary button should be disabled", async () => {
-            expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.primaryButton)).toBeFalsy();
+            expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.locator.primaryButton)).toBeFalsy();
         });
 
         describe("the page is scrolled down 1 page", () => {
             beforeAll(async () => {
-                await getBootStrapButtons.scrollDownOnePage(getBootStrapButtons.primaryLink);
+                await getBootStrapButtons.scrollDownOnePage(getBootStrapButtons.locator.primaryLink);
             });
 
             test("the active primary link button should not be disabled", async () => {
-                expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.primaryLink)).toBeTruthy();
+                expect(await getBootStrapButtons.isEnabled(getBootStrapButtons.locator.primaryLink)).toBeTruthy();
             });
         });
     });

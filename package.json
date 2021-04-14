@@ -6,9 +6,9 @@
   "scripts": {
     "clean": "rimraf temp/screenshots/*.png temp/html-report/",
     "test": "npm run clean && jest",
-    "test:angular": "jest -i tests/angular.test.js",
-    "test:getBootStrap": "jest -i tests/getBootStrap.test.js",
-    "test:getBootStrapButtons": "jest -i tests/getBootStrapButtons.test.js",
+    "test:angular": "npm run clean && jest -i tests/angular.test.js",
+    "test:getBootStrap": "npm run clean && jest -i tests/getBootStrap.test.js",
+    "test:getBootStrapButtons": "npm run clean && jest -i tests/getBootStrapButtons.test.js",
     "lint": "eslint tests --fix"
   },
   "repository": {
