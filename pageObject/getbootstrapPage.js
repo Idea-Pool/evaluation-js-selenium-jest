@@ -1,5 +1,4 @@
 const Common = require("./common");
-const timeout = require("../data/timeouts.json");
 
 class GetBootStrap extends Common {
     constructor(driver, webdriver) {
@@ -28,8 +27,8 @@ class GetBootStrap extends Common {
      * @param  {Locator} locator
      */
     async load(url, locator) {
-        await await this.driver.get(this.url + url);
-        await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        await this.driver.get(this.url + url);
+        await this.waitForElementLocated(locator);
 
     }
 
@@ -40,7 +39,7 @@ class GetBootStrap extends Common {
      * @returns {Promise<undefined>}
      */
     async scrollToElement(locator) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
         return this.driver.sleep(300);
     }
@@ -52,7 +51,7 @@ class GetBootStrap extends Common {
      * @returns {Promise<boolean>}
      */
     async isSelected(locator) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
         return element.isSelected();
     }
 
@@ -63,7 +62,7 @@ class GetBootStrap extends Common {
      * @returns {Array}
      */
     async getTexts(locator) {
-        const elements = await this.driver.wait(this.webdriver.until.elementsLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const elements = await this.waitForElementsLocated(locator);
     
         const texts = [];
         for (const element of elements) {
@@ -80,8 +79,8 @@ class GetBootStrap extends Common {
      * @param  {number} number
      */
     async selectMultiSelect(locator, optionLocator, number) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
-        const options = await this.driver.wait(this.webdriver.until.elementsLocated(optionLocator),timeout.default, `The ${optionLocator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
+        const options = await this.waitForElementsLocated(optionLocator);
         await element.click();
         await options[number].click();
     }

@@ -1,5 +1,4 @@
 const Common = require("./common");
-const timeout = require("../data/timeouts.json");
 
 class Angular extends Common {
     constructor(driver, webdriver) {
@@ -24,7 +23,7 @@ class Angular extends Common {
      */
     async load() {
         await this.driver.get(this.url);
-        await this.driver.wait(this.webdriver.until.elementLocated(this.locator.getStartedButton));
+        await this.waitForElementLocated(this.locator.getStartedButton);
     }
 
     /**
@@ -34,7 +33,7 @@ class Angular extends Common {
      * @returns {Array}
      */
     async getInputText(locator) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
         return await element.getAttribute("value");
     }
 
@@ -46,7 +45,7 @@ class Angular extends Common {
      * 
      */
     async fieldIsTypedIn(locator, text) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
         await element.sendKeys(text);
     }
 
@@ -70,16 +69,6 @@ class Angular extends Common {
      */
     async isTitleOk(title){
         return this.driver.wait(this.webdriver.until.titleIs(title));
-    }
-
-    /**
-     * Waits until elements are presented in the DOM.
-     * 
-     * @param  {Locator} locator
-     * @returns {IThenable<T>|WebElementPromise}
-     */
-    async waitForElementLocated(locator){
-        return this.driver.wait(this.webdriver.until.elementsLocated(locator));
     }
 }
 
