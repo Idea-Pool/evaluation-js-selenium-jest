@@ -1,5 +1,4 @@
 const Common = require("./common");
-const timeout = require("../data/timeouts.json");
 
 class GetBootsrapPageButtons extends Common {
     constructor(driver, webdriver) {
@@ -21,7 +20,7 @@ class GetBootsrapPageButtons extends Common {
      */
     async load(url, locator) {
         await await this.driver.get(this.url + url);
-        await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        await this.waitForElementLocated(locator);
     }
 
     /**
@@ -31,7 +30,7 @@ class GetBootsrapPageButtons extends Common {
      * @param  {Locator} locator
      */
     async scrollDownOnePage(locator) {
-        const element = await this.driver.wait(this.webdriver.until.elementLocated(locator),timeout.default, `The ${locator} locator is not became visible in the DOM.`);
+        const element = await this.waitForElementLocated(locator);
         await element.sendKeys(this.webdriver.Key.PAGE_UP);
     }
 }
