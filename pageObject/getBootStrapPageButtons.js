@@ -19,7 +19,7 @@ class GetBootsrapPageButtons extends Common {
      * @param  {Locator} locator
      */
     async load(url, locator) {
-        await await this.driver.get(this.url + url);
+        await this.driver.get(this.url + url);
         await this.waitForElementLocated(locator);
     }
 
