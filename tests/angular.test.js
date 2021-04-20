@@ -89,9 +89,16 @@ describe("Tests for angular page", () => {
             });
 
             describe("Directive is clicked in the API section", () => {
+                let srlElement;
+
                 beforeAll(async () => {
                     const searchResultListItem = await angularPage.getSearchResultListItem("Directive", "api");
+                    srlElement = await angularPage.waitForElementLocated(angularPage.locator.srl);
                     await angularPage.clickOn(searchResultListItem);
+                });
+
+                test("the search result list should not be visible", async () => {
+                    expect(await angularPage.isInVisible(srlElement)).toBeTruthy();
                 });
 
                 test("the URL should be OK", async () => {

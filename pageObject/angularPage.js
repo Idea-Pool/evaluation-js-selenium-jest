@@ -13,8 +13,19 @@ class Angular extends Common {
             getStartedButton: this.webdriver.By.css("a.button"),
             searchInput: this.webdriver.By.xpath(".//input"),
             headerText : this.webdriver.By.css("h1#introduction-to-the-angular-docs"),
-            searchResultlistItem : (text, section) =>this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`)
+            searchResultlistItem : (text, section) =>this.webdriver.By.xpath(`//div[contains(@class,"search-area")][./h3[contains(.,"${section}")]]//a[./span[contains(.,"${text}")]]`),
+            srl : this.webdriver.By.css("div.search-results")
         };
+    }
+
+    /**
+     * Returns if the element is not displayed.
+     * 
+     * @param  {Element} element
+     * @returns {Promise<boolean>}
+     */
+    async isInVisible(element){
+        return this.driver.wait(this.webdriver.until.stalenessOf(element)); 
     }
 
     /**
