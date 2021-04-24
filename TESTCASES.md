@@ -21,7 +21,7 @@
 > - [x] Checking attribute of element
 > - [x] Checking number of elements
 > - [x] Selecting element by its text
-> - [x] Checking whether element is in the viewport
+> - [-] Checking whether element is in the viewport
 > - [x] Scrolling page
 > - [ ] Any more action/check necessary...
 
@@ -57,7 +57,7 @@
 1. **Given** https://getbootstrap.com/docs/4.4/components/forms/ URL is opened
 1. **Then** title of the browser should be "Forms · Bootstrap"
 1. **And** The readonly input should not be in the viewport
-1. **When** The readonly input is scrolled into the viewport
+1. **When** The readonly input is scrolled into the viewportc
 1. **Then** The readonly input should be in the viewport
 1. **And** The readonly input should be readonly
 
