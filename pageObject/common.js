@@ -53,7 +53,7 @@ class Common {
      * Gets the title of the page.
      */
     async getTitle() {
-        return await this.driver.getTitle();
+        return this.driver.getTitle();
     }
 
     /**
